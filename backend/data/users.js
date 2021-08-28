@@ -4,7 +4,7 @@ const users = [
     name: "Ahsan",
     email: "ahsan@gmail.com",
     password: bcrypt.hashSync("123456", 10),
-    isActive: true,
+    isAdmin: true,
   },
   {
     name: "Ahmad",
