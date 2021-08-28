@@ -23,7 +23,30 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-// login user and assign token ==> /api/users/profile
+// register a new user ==> /api/users
+const registerUser = asyncHandler(async (req, res) => {
+  const { email, password, name } = req.body;
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    res.status(404);
+    throw new Error("User already Registered");
+  }
+  const user = await User.create({ name, email, password });
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid user data");
+  }
+});
+
+// get the current user profile ==> /api/users/profile
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -42,4 +65,4 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile };
+export { authUser, getUserProfile, registerUser };
