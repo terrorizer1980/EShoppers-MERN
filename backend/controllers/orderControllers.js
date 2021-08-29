@@ -18,7 +18,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     return;
   } else {
     const order = new Order({
-      rderItems,
+      orderItems,
       shippingAddress,
       shippingPrice,
       paymentMethod,
