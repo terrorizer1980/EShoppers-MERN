@@ -106,6 +106,37 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not Found");
+  }
+});
+
+const updatedUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.isAdmin = req.body.isAdmin;
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error("User not found");
+  }
+});
+
 export {
   authUser,
   getUserProfile,
@@ -113,4 +144,6 @@ export {
   updateUserProfile,
   getAllUsers,
   deleteUser,
+  getUserById,
+  updatedUser,
 };
