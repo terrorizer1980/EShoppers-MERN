@@ -16,7 +16,7 @@ export default function Header() {
       <Navbar bg='dark' variant='dark' collapseOnSelect expand='lg'>
         <Container>
           <Link to='/'>
-            <Navbar.Brand>ProShop</Navbar.Brand>
+            <Navbar.Brand>EShoppers</Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
