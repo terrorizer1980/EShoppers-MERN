@@ -1,9 +1,13 @@
 # Create a .env file in the root and add the environment variables:
 
 NODE_ENV = development
+
 PORT = 5000
+
 MONGO_URI = your mongodb uri
+
 JWT_SECRET = 'abc123'
+
 PAYPAL_CLIENT_ID = your paypal client id
 
 # For Frontend:
